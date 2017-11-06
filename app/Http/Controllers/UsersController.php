@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     public function index(){
-        return User::all();//todos los usuarios
+        //return User::all();//todos los usuarios
        // return ('usuarios');
-        return view("users.index")->with('users', $users);
+        $users= User::all();
+        return view("users.index")->with('users',$users);
     }
 }
