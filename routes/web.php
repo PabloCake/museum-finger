@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/*
+route::get('/home', function (){
+    return ("vista hola vista");
+});
+*/
+route::get('/museums','MuseimsController@index');
+
+//usuarios
+
+route::get('/users', 'UsersController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
