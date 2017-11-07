@@ -19,7 +19,7 @@ route::get('/home', function (){
     return ("vista hola vista");
 });
 */
-route::get('/museums','MuseimsController@index');
+//route::get('/museums','MuseimsController@index');
 
 //usuarios
 
@@ -30,3 +30,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users/{user}', 'UsersController@show');
+
+Route::resource('museums','MuseumsController');
