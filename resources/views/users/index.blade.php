@@ -1,11 +1,11 @@
-@extends("layout.app");
+@extends("layouts.app");
 
 @section("content")
     <div class="container">
         <div class="col-xs-12">
-            @foreach ($users as $user)
+            @foreach($users as $user)
                 <div class ="alert alert-info">
-                    {{$user->name}}
+                    {{ $user->name }}
                 </div>
             @endforeach
         </div>

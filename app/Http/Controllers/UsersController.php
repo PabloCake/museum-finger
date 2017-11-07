@@ -13,4 +13,10 @@ class UsersController extends Controller
         $users= User::all();
         return view("users.index")->with('users',$users);
     }
+
+     // Route model Binding
+    public function show(User $user){
+            return $user;
+
+    }
 }
