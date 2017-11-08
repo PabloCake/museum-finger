@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Museum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator; //NAMESPACE para las validaciones.
 
 class MuseumsController extends Controller
 {
@@ -13,7 +15,7 @@ class MuseumsController extends Controller
      */
     public function index()
     {
-        //
+        return view("museums.index");
     }
 
     /**
@@ -35,8 +37,48 @@ class MuseumsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd($request);
+        /*validación*/
+        $rules = [
+            'name' =>'required',
+            'description' =>'required',
+            'image' =>'required',
+            'thumbnail' =>'required',
+            'address' =>'required',
+            'phone' =>'required',
+            'hours' =>'required',
+            'rating' =>'required',
+
+        ];
+        $messages = [
+            'name.required'         => 'el Nombre es requerido.',
+            'description.required'  =>'La Descripción es requerida.',
+            'image.required'        =>'La Imagen es requerida',
+
+        ];
+        //validación de los errores.
+        $validator = Validator::make($request->all(),$rules,$messages);
+
+        if ($validator->fails()){
+            flash("No se pudo guardar el museums!")->error();
+            return redirect()->action('MuseumsController@create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $museum = new Museum();
+        $museum -> name         = $request->input('name');
+        $museum -> description  = $request->input('description');
+        /*
+        $museum -> image        = "";
+        $museum -> thumbnail    ="";
+        $museum -> address      ="";
+        $museum ->  phone       ="";
+        $museum ->  hours       ="";
+        $museum ->  rating      = 4.8;
+        */
+        $museum->save();
+        flash('El museo ha sido guardado')->success();
+        return redirect()->action('MuseumsController@index');
+
     }
 
     /**
