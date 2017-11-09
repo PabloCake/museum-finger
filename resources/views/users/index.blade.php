@@ -6,6 +6,8 @@
             @foreach($users as $user)
                 <div class ="alert alert-info">
                     {{ $user->name }}
+
+                    {{ $user->email }}
                 </div>
             @endforeach
         </div>

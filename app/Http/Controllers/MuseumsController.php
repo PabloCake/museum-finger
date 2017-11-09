@@ -15,7 +15,8 @@ class MuseumsController extends Controller
      */
     public function index()
     {
-        return view("museums.index");
+        $museums= Museum::all();
+        return view("museums.index")->with('museums',$museums);
     }
 
     /**
@@ -67,14 +68,13 @@ class MuseumsController extends Controller
         $museum = new Museum();
         $museum -> name         = $request->input('name');
         $museum -> description  = $request->input('description');
-        /*
-        $museum -> image        = "";
-        $museum -> thumbnail    ="";
-        $museum -> address      ="";
-        $museum ->  phone       ="";
-        $museum ->  hours       ="";
-        $museum ->  rating      = 4.8;
-        */
+        $museum -> image        = $request->input('image');
+        $museum -> thumbnail    = $request->input('thumbnail');
+        $museum -> address      = $request->input('address');
+        $museum ->  phone       = $request->input('phone');
+        $museum ->  hours       = $request->input('hours');
+        $museum ->  rating      = $request->input('rating');
+
         $museum->save();
         flash('El museo ha sido guardado')->success();
         return redirect()->action('MuseumsController@index');
